@@ -79,6 +79,10 @@ int g_input_add_full(GIOChannel *source, int priority, int condition,
 
 /* return full path for ~/.irssi */
 const char *get_irssi_dir(void);
+/* return full path for the config direcotry */
+const char *get_irssi_config_dir(void);
+/* return full path for the data direcotry */
+const char *get_irssi_data_dir(void);
 /* return full path for ~/.irssi/config */
 const char *get_irssi_config(void);
 

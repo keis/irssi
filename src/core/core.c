@@ -62,12 +62,22 @@ int irssi_init_finished;
 int reload_config;
 time_t client_start_time;
 
-static char *irssi_dir, *irssi_config_file;
+static char *irssi_dir, *irssi_config_dir, *irssi_data_dir, *irssi_config_file;
 static GSList *dialog_type_queue, *dialog_text_queue;
 
 const char *get_irssi_dir(void)
 {
 	return irssi_dir;
+}
+
+const char *get_irssi_config_dir(void)
+{
+	return irssi_config_dir ? irssi_config_dir : irssi_dir;
+}
+
+const char *get_irssi_data_dir(void)
+{
+	return irssi_data_dir ? irssi_config_dir : irssi_dir;
 }
 
 /* return full path for ~/.irssi/config */
@@ -188,6 +198,11 @@ void core_preinit(const char *path)
 			home = ".";
 
 		irssi_dir = g_strdup_printf(IRSSI_DIR_FULL, home);
+
+		if (!g_file_test (irssi_dir, G_FILE_TEST_EXISTS)) {
+			irssi_config_dir = g_strdup_printf("%s/irssi/", g_get_user_config_dir());
+			irssi_data_dir = g_strdup_printf("%s/irssi/", g_get_user_data_dir());
+		}
 	} else {
 		str = irssi_dir;
 		irssi_dir = fix_path(str);
@@ -196,8 +211,10 @@ void core_preinit(const char *path)
 		if (irssi_dir[len-1] == G_DIR_SEPARATOR)
 			irssi_dir[len-1] = '\0';
 	}
+
 	if (irssi_config_file == NULL)
-		irssi_config_file = g_strdup_printf("%s/"IRSSI_HOME_CONFIG, irssi_dir);
+		irssi_config_file = g_strdup_printf("%s/"IRSSI_HOME_CONFIG, get_irssi_config_dir());
+
 	else {
 		str = irssi_config_file;
 		irssi_config_file = fix_path(str);

@@ -265,7 +265,7 @@ static void check_files(void)
 {
 	struct stat statbuf;
 
-	if (stat(get_irssi_dir(), &statbuf) != 0) {
+	if (stat(get_irssi_config_dir(), &statbuf) != 0) {
 		/* ~/.irssi doesn't exist, first time running irssi */
 		display_firsttimer = TRUE;
 	}

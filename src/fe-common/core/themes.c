@@ -903,7 +903,7 @@ THEME_REC *theme_load(const char *setname)
 	theme = theme_find(name);
 
 	/* check home dir */
-	fname = g_strdup_printf("%s/%s.theme", get_irssi_dir(), name);
+	fname = g_strdup_printf("%s/%s.theme", get_irssi_data_dir(), name);
 	if (stat(fname, &statbuf) != 0) {
 		/* check global config dir */
 		g_free(fname);
@@ -1228,7 +1228,7 @@ static void theme_save(THEME_REC *theme, int save_all)
 
 	basename = g_path_get_basename(theme->path);
 	/* always save the theme to ~/.irssi/ */
-	path = g_strdup_printf("%s/%s", get_irssi_dir(), basename);
+	path = g_strdup_printf("%s/%s", get_irssi_data_dir(), basename);
 	ok = config_write(config, path, 0660) == 0;
 	g_free(basename);
 
@@ -1384,7 +1384,7 @@ void themes_reload(void)
 	/* first there's default theme.. */
 	current_theme = theme_load("default");
 	if (current_theme == NULL) {
-		fname = g_strdup_printf("%s/default.theme", get_irssi_dir());
+		fname = g_strdup_printf("%s/default.theme", get_irssi_data_dir());
 		current_theme = theme_create(fname, "default");
 		current_theme->default_color = -1;
 		theme_read(current_theme, NULL);

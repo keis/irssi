@@ -354,7 +354,7 @@ char *perl_script_get_path(const char *name)
 		g_strdup_printf("%s.pl", name);
 
 	/* check from ~/.irssi/scripts/ */
-	path = g_strdup_printf("%s/scripts/%s", get_irssi_dir(), file);
+	path = g_strdup_printf("%s/scripts/%s", get_irssi_data_dir(), file);
 	if (stat(path, &statbuf) != 0) {
 		/* check from SCRIPTDIR */
 		g_free(path);
@@ -388,7 +388,7 @@ static void perl_scripts_autorun(void)
 	char *path, *fname;
 
 	/* run *.pl scripts from ~/.irssi/scripts/autorun/ */
-	path = g_strdup_printf("%s/scripts/autorun", get_irssi_dir());
+	path = g_strdup_printf("%s/scripts/autorun", get_irssi_data_dir());
 	dirp = opendir(path);
 	if (dirp == NULL) {
 		g_free(path);

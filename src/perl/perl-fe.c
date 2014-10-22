@@ -197,7 +197,7 @@ static void sig_complete_load(GList **list, WINDOW_REC *window,
 		return;
 
 	/* completing filename parameter for /SCRIPT LOAD */
-	user_dir = g_strdup_printf("%s/scripts", get_irssi_dir());
+	user_dir = g_strdup_printf("%s/scripts", get_irssi_data_dir());
 	*list = filename_complete(word, user_dir);
 	*list = g_list_concat(*list, filename_complete(word, SCRIPTDIR));
 	g_free(user_dir);

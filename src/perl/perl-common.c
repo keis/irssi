@@ -230,7 +230,7 @@ char *perl_get_use_list(void)
 
 	use_lib = settings_get_str("perl_use_lib");
 	g_string_printf(str, "use lib qw(%s/scripts "SCRIPTDIR" %s);",
-	                get_irssi_dir(), use_lib);
+	                get_irssi_data_dir(), use_lib);
 
 	g_string_append(str, "use Irssi;");
 	if (irssi_gui != IRSSI_GUI_NONE)

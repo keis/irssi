@@ -115,7 +115,7 @@ static GModule *module_open(const char *name, int *found)
 		path = g_strdup(name);
 	else {
 		/* first try from home dir */
-		str = g_strdup_printf("%s/modules", get_irssi_dir());
+		str = g_strdup_printf("%s/modules", get_irssi_data_dir());
 		path = g_module_build_path(str, name);
 		g_free(str);
 

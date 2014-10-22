@@ -81,7 +81,7 @@ static void cmd_upgrade(const char *data)
 	   /UPGRADE /usr/bin/screen irssi */
 	str = g_strdup_printf("%s --noconnect --session=%s --home=%s --config=%s",
 	                      binary, session_file,
-	                      get_irssi_dir(),
+	                      get_irssi_data_dir(),
 	                      get_irssi_config());
 	g_free(binary);
 	g_free(session_file);

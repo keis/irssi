@@ -893,11 +893,11 @@ THEME_REC *theme_load(const char *setname)
 	struct stat statbuf;
 	char *fname, *name, *p;
 
-        name = g_strdup(setname);
+	name = g_strdup(setname);
 	p = strrchr(name, '.');
 	if (p != NULL && strcmp(p, ".theme") == 0) {
 		/* remove the trailing .theme */
-                *p = '\0';
+		*p = '\0';
 	}
 
 	theme = theme_find(name);
@@ -923,11 +923,11 @@ THEME_REC *theme_load(const char *setname)
 		return theme;
 	}
 
-        oldtheme = theme;
+	oldtheme = theme;
 	theme = theme_create(fname, name);
 	theme->last_modify = statbuf.st_mtime;
 	if (!theme_read(theme, theme->path)) {
-                /* error reading .theme file */
+		/* error reading .theme file */
 		theme_destroy(theme);
 		theme = NULL;
 	}
@@ -1207,34 +1207,34 @@ static void theme_save(THEME_REC *theme, int save_all)
 	int ok;
 
 	config = config_open(theme->path, -1);
-        if (config != NULL)
-                config_parse(config);
-        else {
-                if (g_ascii_strcasecmp(theme->name, "default") == 0) {
-                        config = config_open(NULL, -1);
-                        config_parse_data(config, default_theme, "internal");
-                        config_change_file_name(config, theme->path, 0660);
-                } else {
-                        config = config_open(theme->path, 0660);
-                        if (config == NULL)
-                                return;
-                        config_parse(config);
-                }
-        }
+	if (config != NULL)
+		config_parse(config);
+	else {
+		if (g_ascii_strcasecmp(theme->name, "default") == 0) {
+			config = config_open(NULL, -1);
+			config_parse_data(config, default_theme, "internal");
+			config_change_file_name(config, theme->path, 0660);
+		} else {
+			config = config_open(theme->path, 0660);
+			if (config == NULL)
+				return;
+			config_parse(config);
+		}
+	}
 
 	data.config = config;
-        data.save_all = save_all;
+	data.save_all = save_all;
 	g_hash_table_foreach(theme->modules, (GHFunc) module_save, &data);
 
 	basename = g_path_get_basename(theme->path);
-        /* always save the theme to ~/.irssi/ */
+	/* always save the theme to ~/.irssi/ */
 	path = g_strdup_printf("%s/%s", get_irssi_dir(), basename);
 	ok = config_write(config, path, 0660) == 0;
 	g_free(basename);
 
 	printformat(NULL, NULL, MSGLEVEL_CLIENTNOTICE,
-		    ok ? TXT_THEME_SAVED : TXT_THEME_SAVE_FAILED,
-		    path, config_last_error(config));
+	            ok ? TXT_THEME_SAVED : TXT_THEME_SAVE_FAILED,
+	            path, config_last_error(config));
 
 	g_free(path);
 	config_close(config);
@@ -1387,11 +1387,11 @@ void themes_reload(void)
 		fname = g_strdup_printf("%s/default.theme", get_irssi_dir());
 		current_theme = theme_create(fname, "default");
 		current_theme->default_color = -1;
-                theme_read(current_theme, NULL);
+		theme_read(current_theme, NULL);
 		g_free(fname);
 	}
 
-        window_themes_update();
+	window_themes_update();
 	change_theme(settings_get_str("theme"), FALSE);
 
 	while (refs != NULL) {

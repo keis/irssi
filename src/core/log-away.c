@@ -33,7 +33,7 @@ static void sig_log_written(LOG_REC *log)
 {
 	if (log != awaylog) return;
 
-        away_msgs++;
+	away_msgs++;
 }
 
 static void awaylog_open(void)
@@ -93,7 +93,7 @@ static void sig_away_changed(SERVER_REC *server)
 	if (server->usermode_away)
 		awaylog_open();
 	else
-                awaylog_close();
+		awaylog_close();
 }
 
 void log_away_init(void)

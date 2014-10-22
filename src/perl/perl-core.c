@@ -346,7 +346,7 @@ char *perl_script_get_path(const char *name)
 
 	if (g_path_is_absolute(name) || (name[0] == '~' && name[1] == '/')) {
 		/* full path specified */
-                return convert_home(name);
+		return convert_home(name);
 	}
 
 	/* add .pl suffix if it's missing */
@@ -387,7 +387,7 @@ static void perl_scripts_autorun(void)
 	struct stat statbuf;
 	char *path, *fname;
 
-        /* run *.pl scripts from ~/.irssi/scripts/autorun/ */
+	/* run *.pl scripts from ~/.irssi/scripts/autorun/ */
 	path = g_strdup_printf("%s/scripts/autorun", get_irssi_dir());
 	dirp = opendir(path);
 	if (dirp == NULL) {

@@ -687,8 +687,8 @@ static void init_configfile(void)
 		}
 	} else if (!S_ISDIR(statbuf.st_mode)) {
 		g_error("%s is not a directory.\n"
-			"You should remove it with command: rm %s",
-			get_irssi_dir(), get_irssi_dir());
+		        "You should remove it with command: rm %s",
+		        get_irssi_dir(), get_irssi_dir());
 	}
 
 	mainconfig = parse_configfile(NULL);
@@ -697,9 +697,9 @@ static void init_configfile(void)
 	/* any errors? */
 	if (config_last_error(mainconfig) != NULL) {
 		str = g_strdup_printf("Ignored errors in configuration file:\n%s",
-				      config_last_error(mainconfig));
+		                      config_last_error(mainconfig));
 		signal_emit("gui dialog", 2, "error", str);
-                g_free(str);
+		g_free(str);
 	}
 
 	signal(SIGTERM, sig_term);

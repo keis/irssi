@@ -188,8 +188,8 @@ static void sig_script_error(PERL_SCRIPT_REC *script, const char *error)
 }
 
 static void sig_complete_load(GList **list, WINDOW_REC *window,
-			      const char *word, const char *line,
-			      int *want_space)
+                              const char *word, const char *line,
+                              int *want_space)
 {
         char *user_dir;
 
@@ -200,7 +200,7 @@ static void sig_complete_load(GList **list, WINDOW_REC *window,
 	user_dir = g_strdup_printf("%s/scripts", get_irssi_dir());
 	*list = filename_complete(word, user_dir);
 	*list = g_list_concat(*list, filename_complete(word, SCRIPTDIR));
-        g_free(user_dir);
+	g_free(user_dir);
 
 	if (*list != NULL) {
 		*want_space = FALSE;

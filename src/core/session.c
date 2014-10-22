@@ -69,22 +69,24 @@ static void cmd_upgrade(const char *data)
 		cmd_return_error(CMDERR_PROGRAM_NOT_FOUND);
 
 	/* save the session */
-        session_file = g_strdup_printf("%s/session", get_irssi_dir());
+	session_file = g_strdup_printf("%s/session", get_irssi_data_dir());
 	session = config_open(session_file, 0600);
-        unlink(session_file);
+	unlink(session_file);
 
 	signal_emit("session save", 1, session);
-        config_write(session, NULL, -1);
-        config_close(session);
+	config_write(session, NULL, -1);
+	config_close(session);
 
 	/* data may contain some other program as well, like
 	   /UPGRADE /usr/bin/screen irssi */
 	str = g_strdup_printf("%s --noconnect --session=%s --home=%s --config=%s",
-			      binary, session_file, get_irssi_dir(), get_irssi_config());
+	                      binary, session_file,
+	                      get_irssi_dir(),
+	                      get_irssi_config());
 	g_free(binary);
 	g_free(session_file);
-        session_args = g_strsplit(str, " ", -1);
-        g_free(str);
+	session_args = g_strsplit(str, " ", -1);
+	g_free(str);
 
 	signal_emit("gui exit", 0);
 }

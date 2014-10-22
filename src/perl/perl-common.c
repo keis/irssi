@@ -223,16 +223,16 @@ char *perl_get_use_list(void)
 {
 	GString *str;
 	GSList *tmp;
-        char *ret;
-        const char *use_lib;
+	char *ret;
+	const char *use_lib;
 
 	str = g_string_new(NULL);
 
 	use_lib = settings_get_str("perl_use_lib");
 	g_string_printf(str, "use lib qw(%s/scripts "SCRIPTDIR" %s);",
-			 get_irssi_dir(), use_lib);
+	                get_irssi_dir(), use_lib);
 
-        g_string_append(str, "use Irssi;");
+	g_string_append(str, "use Irssi;");
 	if (irssi_gui != IRSSI_GUI_NONE)
 		g_string_append(str, "use Irssi::UI;");
 
@@ -240,8 +240,8 @@ char *perl_get_use_list(void)
 		g_string_append_printf(str, "use Irssi::%s;", (char *) tmp->data);
 
 	ret = str->str;
-        g_string_free(str, FALSE);
-        return ret;
+	g_string_free(str, FALSE);
+	return ret;
 }
 
 void irssi_callXS(void (*subaddr)(pTHX_ CV* cv), CV *cv, SV **mark)

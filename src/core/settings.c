@@ -678,17 +678,18 @@ static CONFIG_REC *parse_configfile(const char *fname)
 static void init_configfile(void)
 {
 	struct stat statbuf;
+	const char *config_dir = get_irssi_config_dir();
 	char *str;
 
-	if (stat(get_irssi_dir(), &statbuf) != 0) {
+	if (stat(config_dir, &statbuf) != 0) {
 		/* ~/.irssi not found, create it. */
-		if (mkpath(get_irssi_dir(), 0700) != 0) {
-			g_error("Couldn't create %s directory", get_irssi_dir());
+		if (mkpath(config_dir, 0700) != 0) {
+			g_error("Couldn't create %s directory", config_dir);
 		}
 	} else if (!S_ISDIR(statbuf.st_mode)) {
 		g_error("%s is not a directory.\n"
 		        "You should remove it with command: rm %s",
-		        get_irssi_dir(), get_irssi_dir());
+		        config_dir, config_dir);
 	}
 
 	mainconfig = parse_configfile(NULL);
